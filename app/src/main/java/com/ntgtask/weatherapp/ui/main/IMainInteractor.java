@@ -1,4 +1,4 @@
 package com.ntgtask.weatherapp.ui.main;
 
-public interface IMainPresenter {
+public interface IMainInteractor{
 }

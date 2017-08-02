@@ -1,5 +1,5 @@
 package com.ntgtask.weatherapp.ui.main;
 
-public class MainPresenter {
+public class MainPresenter implements IMainPresenter{
 
 }

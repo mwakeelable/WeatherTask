@@ -3,8 +3,6 @@ package com.ntgtask.weatherapp.core;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.ntgtask.weatherapp.AppController;
-
 
 public class SessionManager {
     public SharedPreferences pref;

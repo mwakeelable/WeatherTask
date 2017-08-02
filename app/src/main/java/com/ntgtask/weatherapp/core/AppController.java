@@ -1,4 +1,4 @@
-package com.ntgtask.weatherapp;
+package com.ntgtask.weatherapp.core;
 
 import android.app.Application;
 
@@ -14,6 +14,5 @@ public class AppController extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-//        startService(new Intent(getBaseContext(), WeatherService.class));
     }
 }
