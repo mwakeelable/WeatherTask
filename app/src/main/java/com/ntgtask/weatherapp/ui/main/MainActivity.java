@@ -22,4 +22,9 @@ public class MainActivity extends BaseActivity {
         return R.layout.main_activity;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
 }
