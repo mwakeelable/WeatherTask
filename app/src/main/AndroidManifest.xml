@@ -30,7 +30,6 @@
 
         <service android:name=".service.WeatherService" />
 
-        <receiver android:name=".service.AlarmService" />
     </application>
 
 </manifest>

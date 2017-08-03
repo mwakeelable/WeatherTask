@@ -25,6 +25,6 @@ public class SessionManager {
     }
 
     public long getLastTimeCheck() {
-        return pref.getLong(KEY_LAST_TIME_CHECK, 0);
+        return pref.getLong(KEY_LAST_TIME_CHECK, -1);
     }
 }

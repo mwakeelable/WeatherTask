@@ -11,6 +11,8 @@ import com.ntgtask.weatherapp.R;
 import com.ntgtask.weatherapp.service.WeatherService;
 import com.ntgtask.weatherapp.ui.BaseActivity;
 
+import java.util.Calendar;
+
 
 public class MainActivity extends BaseActivity implements IMainView {
     ActionBar mActionBar;
@@ -25,6 +27,8 @@ public class MainActivity extends BaseActivity implements IMainView {
     TextView lastUpdate;
     TextView todayIcon;
     Typeface weatherFont;
+
+    private static final long NO_UPDATE_REQUIRED_THRESHOLD = 14400000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +49,8 @@ public class MainActivity extends BaseActivity implements IMainView {
         todayIcon = (TextView) findViewById(R.id.todayIcon);
         weatherFont = Typeface.createFromAsset(this.getAssets(), "fonts/weather.ttf");
         todayIcon.setTypeface(weatherFont);
-        startService(new Intent(getBaseContext(), WeatherService.class));
+        if (shouldUpdate())
+            startService(new Intent(getBaseContext(), WeatherService.class));
     }
 
     @Override
@@ -57,5 +62,10 @@ public class MainActivity extends BaseActivity implements IMainView {
     public void onBackPressed() {
         super.onBackPressed();
         finishAffinity();
+    }
+
+    private boolean shouldUpdate() {
+        long lastUpdate = session.getLastTimeCheck();
+        return lastUpdate < 0 || (Calendar.getInstance().getTimeInMillis() - lastUpdate) > NO_UPDATE_REQUIRED_THRESHOLD;
     }
 }
