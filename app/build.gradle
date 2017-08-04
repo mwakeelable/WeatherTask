@@ -34,5 +34,13 @@ dependencies {
     // JSON Parsing
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    //Location
+    compile 'com.google.android.gms:play-services-location:10.0.1'
+    compile 'com.google.android.gms:play-services-places:10.0.1'
+    // Rx
+    compile 'io.reactivex:rxandroid:1.0.1'
+    compile 'io.reactivex:rxjava:1.1.7'
+    compile 'com.jakewharton.rxbinding:rxbinding:0.3.0'
     testCompile 'junit:junit:4.12'
+
 }

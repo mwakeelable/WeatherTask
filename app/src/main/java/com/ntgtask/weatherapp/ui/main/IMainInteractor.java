@@ -1,4 +1,10 @@
 package com.ntgtask.weatherapp.ui.main;
 
-public interface IMainInteractor{
+import com.ntgtask.weatherapp.interfaces.OnDataFetched;
+import com.ntgtask.weatherapp.interfaces.OnGPSAllowed;
+
+public interface IMainInteractor {
+    void validateGPSIsAllowed(OnGPSAllowed gpsAllowed);
+
+    void fillUiWithData(OnDataFetched dataFetched);
 }

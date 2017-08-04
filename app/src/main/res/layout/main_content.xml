@@ -18,6 +18,15 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alexandria"
+            android:textColor="@color/text_light"
+            android:textSize="40dp" />
+
+
+        <TextView
             android:id="@+id/todayTemperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,58 +59,6 @@
             android:textColor="@color/text_light"
             android:textSize="16dp" />
 
-        <TextView
-            android:id="@+id/todayHumidity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Humidity: 0 %"
-            android:textColor="@color/text_light"
-            android:textSize="16dp" />
-
-        <TextView
-            android:id="@+id/todaySunrise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sunrise: 00:00"
-            android:textColor="@color/text_light"
-            android:textSize="16dp" />
-
-        <TextView
-            android:id="@+id/todaySunset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sunset: 00:00"
-            android:textColor="@color/text_light"
-            android:textSize="16dp" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/todayIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:paddingRight="42dp"
-            android:text=""
-            android:textAlignment="viewEnd"
-            android:textSize="72dp" />
-
-        <TextView
-            android:id="@+id/lastUpdate"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom|end"
-            android:gravity="bottom|end"
-            android:paddingRight="16dp"
-            android:textAlignment="viewEnd"
-            android:textSize="16dp" />
-    </LinearLayout>
-
 
 </LinearLayout>

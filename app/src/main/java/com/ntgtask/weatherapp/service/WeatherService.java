@@ -2,6 +2,7 @@ package com.ntgtask.weatherapp.service;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -20,6 +21,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class WeatherService extends Service {
+    private final IBinder mBinder = new LocalBinder();
+
+    public class LocalBinder extends Binder {
+        public WeatherService getService() {
+            // Return this instance of LocalService so clients can call public methods
+            return WeatherService.this;
+        }
+    }
+
+
     ApiInterface apiInterface = ApiUtils.getWeatherService();
 
     @Override
@@ -31,12 +42,12 @@ public class WeatherService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return mBinder;
     }
+
 
     private void getWeatherStatus() {
         final SessionManager sessionManager = new SessionManager(getApplicationContext());
-
         apiInterface.getWeatherStatus(31.2001, 29.9187, getResources().getString(R.string.API_KEY)).enqueue(new Callback<WeatherResponse>() {
             @Override
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
@@ -55,4 +66,6 @@ public class WeatherService extends Service {
             }
         });
     }
+
+
 }

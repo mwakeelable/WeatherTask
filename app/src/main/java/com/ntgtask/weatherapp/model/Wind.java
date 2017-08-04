@@ -3,10 +3,6 @@ package com.ntgtask.weatherapp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by wakeel on 31/07/17.
- */
-
 public class Wind {
     @SerializedName("speed")
     @Expose
