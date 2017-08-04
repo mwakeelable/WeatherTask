@@ -9,7 +9,7 @@
     android:padding="16dp"
     android:paddingTop="?attr/actionBarSize"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.main.MainActivity"
+    tools:context=".presentation.components.activities.MainActivity"
     tools:showIn="@layout/main_activity">
 
     <LinearLayout
