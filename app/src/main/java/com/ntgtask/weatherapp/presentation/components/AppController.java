@@ -18,6 +18,8 @@ public class AppController extends Application {
     public final String KEY_WIND = "wind";
     public final String KEY_PRESSURE = "pressure";
     public final String KEY_NAME = "name";
+    public final String KEY_LAT = "lat";
+    public final String KEY_LON = "lon";
 
     public static synchronized AppController getInstance() {
         return mInstance;
@@ -52,7 +54,20 @@ public class AppController extends Application {
         weather.put(KEY_WIND, String.valueOf(pref.getFloat(KEY_WIND, 0)));
         weather.put(KEY_PRESSURE, String.valueOf(pref.getFloat(KEY_PRESSURE, 0)));
         weather.put(KEY_NAME, pref.getString(KEY_NAME, ""));
-        return  weather;
+        return weather;
+    }
+
+    public void storeLatLong(String lat, String lon) {
+        editor.putString(KEY_LAT, lat);
+        editor.putString(KEY_LON, lon);
+        editor.commit();
+    }
+
+    public HashMap<String, String> getLatLong() {
+        HashMap<String, String> latLong = new HashMap<>();
+        latLong.put(KEY_LAT, pref.getString(KEY_LAT, ""));
+        latLong.put(KEY_LON, pref.getString(KEY_LON, ""));
+        return latLong;
     }
 
     public long getLastTimeCheck() {

@@ -1,35 +1,35 @@
-package com.ntgtask.weatherapp.presentation.presenter;
+package com.ntgtask.weatherapp.service;
 
+import android.app.IntentService;
+import android.content.Intent;
 import android.util.Log;
 
 import com.ntgtask.weatherapp.data.entities.WeatherResponse;
 import com.ntgtask.weatherapp.data.network.ApiInterface;
 import com.ntgtask.weatherapp.data.network.ApiUtils;
-import com.ntgtask.weatherapp.domain.IMainInteractor;
-import com.ntgtask.weatherapp.domain.MainInteractor;
-import com.ntgtask.weatherapp.domain.interfaces.OnDataFetched;
-import com.ntgtask.weatherapp.domain.interfaces.RepeatService;
 import com.ntgtask.weatherapp.presentation.components.AppController;
 import com.ntgtask.weatherapp.presentation.components.Constants;
-import com.ntgtask.weatherapp.presentation.view.IMainView;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainPresenter implements IMainPresenter, OnDataFetched, RepeatService {
-    private IMainView mainView;
-    private IMainInteractor mainInteractor;
 
-    public MainPresenter(IMainView view) {
-        this.mainView = view;
-        this.mainInteractor = new MainInteractor();
+public class WeatherService extends IntentService {
+    public WeatherService() {
+        super("WeatherService");
     }
 
     @Override
-    public void fetchWeatherStatus(double latitude, double longitude) {
+    protected void onHandleIntent(Intent intent) {
+        Log.d("Broadcast", "Calls");
+        HashMap<String, String> latLong = AppController.getInstance().getLatLong();
+        double latitude, longitude;
+        latitude = Double.parseDouble(latLong.get("lat"));
+        longitude = Double.parseDouble(latLong.get("lon"));
         ApiInterface apiInterface = ApiUtils.getWeatherService();
         apiInterface.getWeatherStatus(latitude, longitude, Constants.ApiKey).enqueue(new Callback<WeatherResponse>() {
             @Override
@@ -49,8 +49,6 @@ public class MainPresenter implements IMainPresenter, OnDataFetched, RepeatServi
                         weather.getWind().getSpeed(),
                         weather.getMain().getPressure(),
                         weather.getName());
-                mainView.onDataFetched(weather);
-                mainView.scheduleRepeatService();
             }
 
             @Override
@@ -58,15 +56,5 @@ public class MainPresenter implements IMainPresenter, OnDataFetched, RepeatServi
                 Log.d("Error", t.getMessage());
             }
         });
-    }
-
-    @Override
-    public void setDataFetched() {
-        mainInteractor.fillUiWithData(this);
-    }
-
-    @Override
-    public void scheduelRepeat() {
-        mainInteractor.repeatService(this);
     }
 }

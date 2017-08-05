@@ -1,11 +1,12 @@
 package com.ntgtask.weatherapp.presentation.presenter;
 
 
+import com.ntgtask.weatherapp.domain.SplashInteractor;
+import com.ntgtask.weatherapp.domain.interfaces.OnGPSAllowed;
 import com.ntgtask.weatherapp.domain.interfaces.OnSplashTimeFinishedListener;
 import com.ntgtask.weatherapp.presentation.view.ISplashView;
-import com.ntgtask.weatherapp.domain.SplashInteractor;
 
-public class SplashPresenter implements ISplashPresenter, OnSplashTimeFinishedListener {
+public class SplashPresenter implements ISplashPresenter, OnSplashTimeFinishedListener, OnGPSAllowed {
     private ISplashView splashView;
     private SplashInteractor interactor;
 
@@ -15,12 +16,22 @@ public class SplashPresenter implements ISplashPresenter, OnSplashTimeFinishedLi
     }
 
     @Override
+    public void beginCheckGPS() {
+        splashView.checkGPSAvailable();
+    }
+
+    @Override
     public void onSplashTimeFinished() {
         interactor.validateTimeFinished(this);
     }
 
     @Override
     public void goHome() {
-        splashView.navigateToMain();
+
+    }
+
+    @Override
+    public void getCurrentLatLong() {
+        interactor.validateGPSIsAllowed(this);
     }
 }
